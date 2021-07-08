@@ -6,11 +6,11 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:05:36 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/08 11:25:54 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/08 11:52:31 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minitalk.h"
+#include "../include/minitalk.h"
 
 int	ft_strchr(char *str, char c)
 {
