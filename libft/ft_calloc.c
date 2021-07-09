@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/19 12:51:00 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/01/22 14:47:18 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+void	*ft_calloc(size_t count, size_t size)
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	size_t	total_size;
+	void	*ret;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	total_size = size * count;
+	ret = malloc(total_size);
+	if (ret == 0)
+	{
+		return (0);
+	}
+	ft_bzero(ret, total_size);
+	return (ret);
 }

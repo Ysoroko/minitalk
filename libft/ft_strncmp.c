@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/17 09:40:20 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/02 11:21:17 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	size_t	i;
+	char	*my_s1;
+	char	*my_s2;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	i = 0;
+	my_s1 = (char *)(s1);
+	my_s2 = (char *)(s2);
+	if (n > 0)
+	{
+		while (my_s1[i] == my_s2[i] && (my_s1[i] || my_s2[i]) && i < n - 1)
+			i++;
+		return ((unsigned char)(my_s1[i]) - (unsigned char)(my_s2[i]));
+	}
+	return (0);
 }

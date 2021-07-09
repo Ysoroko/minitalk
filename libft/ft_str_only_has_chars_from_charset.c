@@ -1,42 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_client.c                                        :+:      :+:    :+:   */
+/*   ft_str_only_has_chars_from_charset.c               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 11:33:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:36:52 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/04/05 15:59:00 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/05 18:00:29 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-static int	ft_found_errors_in_main(int argc, char **argv)
+/*
+** FT_STR_ONLY_HAS_CHARS_FROM_CHARSET
+** This function returns 1 if str argument is filled with ONLY chars from
+** charset argument. It will return 0 if it sees at least one character not
+** belonging to charset in str
+*/
+
+int	ft_str_only_has_chars_from_charset(char *str, char *charset)
 {
 	int	i;
 
-	if (argc != 3)
-		return (1);
 	i = -1;
-	while (argv[1][++i])
+	while (str[++i])
 	{
-		if (!ft_strchr("0123456789", argv[1][i]))
-			return (1);
+		if (!ft_strchr(charset, str[i]))
+			return (0);
 	}
-	return (0);
-}
-
-/*
-** kill sends the signal
-*/
-
-int	main(int argc, char **argv)
-{
-	int	pid;
-
-	if (ft_found_errors_in_main(argc, argv))
-		return (-1);
-	pid = ft_atoi(argv[1]);
-	kill(pid, SIGUSR1);
+	return (1);
 }

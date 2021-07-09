@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_strlen_until_c.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/04/05 17:38:45 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/05 18:05:58 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** FT_STRLEN_UNTIL_C
+** Same as strlen, but will stop counting if a 'c' argument character is seen
+** This character seen is included in the count (useful for minishell)
 */
 
-int	main(void)
+int	ft_strlen_until_c(const char *str, char c)
 {
-	int	id;
+	int	i;
 
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	if (str[i] == c)
+		c++;
+	return (i);
 }

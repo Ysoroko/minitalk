@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/22 13:26:52 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/02 11:11:55 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+void	ft_putnbr_fd(int n, int fd)
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	unsigned int	m;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	m = (unsigned int)n;
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		m *= -1;
+	}
+	if (m >= 10)
+	{
+		ft_putnbr_fd(m / 10, fd);
+		ft_putnbr_fd(m % 10, fd);
+	}
+	else
+	{
+		ft_putchar_fd('0' + m, fd);
+	}
 }

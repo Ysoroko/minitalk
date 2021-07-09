@@ -1,35 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/05/03 15:20:56 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/05/03 16:17:13 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** ft_strcat
+** Appends suff to pref, terminates the result by a '\0'
+** Returns pref initial address
 */
 
-int	main(void)
+char	*ft_strcat(char *pref, char *suff)
 {
-	int	id;
+	int	i;
+	int	j;
 
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (!pref || !suff)
+		return (pref);
+	i = ft_strlen(pref);
+	j = -1;
+	while (suff[++j])
+	{
+		pref[i] = suff[j];
+		i++;
+	}
+	pref[i] = 0;
+	return (pref);
 }

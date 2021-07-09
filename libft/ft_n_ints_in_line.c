@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_n_ints_in_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/01/22 14:48:52 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/02 11:11:32 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** FT_N_INTS_IN_LINE
+** Returns the number of separate integers represented with digits in str,
+** separated by anything but a digit
 */
 
-int	main(void)
+int	ft_n_ints_in_line(char *str)
 {
-	int	id;
+	int	count;
+	int	i;
 
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		while (str[i] && !ft_isdigit(str[i]))
+			i++;
+		if (ft_isdigit(str[i]))
+			count++;
+		while (str[i] && ft_isdigit(str[i]))
+			i++;
+	}
+	return (count);
 }

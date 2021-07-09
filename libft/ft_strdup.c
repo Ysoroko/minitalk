@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/19 13:11:12 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/05 17:28:50 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+char	*ft_strdup(const char *src)
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	char	*str;
+	char	*my_src;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (!src)
+		return (0);
+	my_src = (char *)(src);
+	str = malloc(sizeof(*str) * (ft_strlen(my_src) + 1));
+	if (str == 0)
+		return (0);
+	return (ft_strcpy(str, my_src));
 }

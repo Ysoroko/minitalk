@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_client.c                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 11:33:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:36:52 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/17 09:48:16 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/01/22 14:52:03 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-static int	ft_found_errors_in_main(int argc, char **argv)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	int	i;
+	size_t			i;
+	unsigned char	*my_dst;
+	unsigned char	*my_src;
+	unsigned char	my_c;
 
-	if (argc != 3)
-		return (1);
-	i = -1;
-	while (argv[1][++i])
+	my_dst = (unsigned char *)(dst);
+	my_src = (unsigned char *)(src);
+	my_c = (unsigned char)(c);
+	i = 0;
+	while (i < n)
 	{
-		if (!ft_strchr("0123456789", argv[1][i]))
-			return (1);
+		if (my_src[i] == my_c)
+		{
+			my_dst[i] = my_src[i];
+			return (&my_dst[i + 1]);
+		}
+		my_dst[i] = my_src[i];
+		i++;
 	}
 	return (0);
-}
-
-/*
-** kill sends the signal
-*/
-
-int	main(int argc, char **argv)
-{
-	int	pid;
-
-	if (ft_found_errors_in_main(argc, argv))
-		return (-1);
-	pid = ft_atoi(argv[1]);
-	kill(pid, SIGUSR1);
 }

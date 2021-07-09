@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin_free_pref_exit.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/04/09 12:35:05 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/10 12:30:43 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** FT_STRJOIN_FREE_PREF_EXIT
+** Same as ft_strjoin, but the previous value of *pref is freed so we can
+** realloc it while joining the two strings
 */
 
-int	main(void)
+char	*ft_strjoin_free_pref_exit(char **pref, char *suff)
 {
-	int	id;
+	char	*ret;
 
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (!pref || !*pref)
+		return (0);
+	if (!suff)
+		return (*pref);
+	ret = ft_strjoin_exit(*pref, suff);
+	ft_free_str(pref);
+	return (ret);
 }

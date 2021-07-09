@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_cut_string_at_last_char.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/04/10 15:00:17 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/10 16:29:12 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** FT_CUT_STRING_AT_LAST_CHAR
+** Replaces the last occurence of char c in string str by a '\0'
 */
 
-int	main(void)
+void	ft_cut_string_at_last_char(char *str, char c)
 {
-	int	id;
+	int	i;
 
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (!str)
+		return ;
+	i = ft_strlen(str);
+	while (--i >= 0)
+	{
+		if (str[i] == c)
+			str[i] = 0;
+	}
 }

@@ -6,28 +6,27 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/09 11:40:59 by ysoroko           #+#    #+#              #
-#    Updated: 2021/07/09 12:12:21 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/07/09 13:50:29 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ------------------------------ Sources ------------------------------
 
 # Files
-UTILS		=	utils/ft_atoi.c \
-				utils/ft_utils.c \
+SERVER		=	ft_server/ft_server.c
 
-SERVER		=	ft_server/ft_server.c \
+CLIENT		=	ft_client/ft_client.c
 
-CLIENT		=	ft_client/ft_client.c \
+LIBFT		=	cd libft && make bonus
+
+LIB			=	libft/libft.a
 
 # Sources and objects
-SERVER_SRC	=	$(UTILS) \
-				$(SERVER) \
+SERVER_SRC	=	$(SERVER) \
 
 SERVER_OBJS	=	$(SERVER_SRC:.c=.o)
 
-CLIENT_SRC	=	$(UTILS) \
-				$(CLIENT) \
+CLIENT_SRC	=	$(CLIENT) \
 
 CLIENT_OBJS	=	$(CLIENT_SRC:.c=.o)
 
@@ -66,9 +65,9 @@ SERV_READY	=	echo "\n📥 Server ready!\n"
 
 CLI_READY	=	echo "\n📟 Client ready!\n"
 
-CLEANED		=	echo "\n🧼 $(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" files \n"
+CLEANED		=	echo "\n💧 $(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" files \n"
 
-FCLEANED	=	echo "\n🧽 $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
+FCLEANED	=	echo "\n🧼 $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
 
 
 # ------------------------------ Rules ------------------------------
@@ -78,22 +77,28 @@ FCLEANED	=	echo "\n🧽 $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables
 
 all: $(NAME)
 
-$(NAME): server client
+$(NAME): comp_start server client
+
+comp_start:
+	@$(COMP_START)
+	@$(LIBFT)
 
 server: $(SERVER_OBJS)
-	@$(GCC) $(FLAGS) $(SERVER_OBJS) -o $(SERVER_NAME)
+	@$(GCC) $(FLAGS) $(SERVER_OBJS) $(LIB) -o $(SERVER_NAME)
 	@$(SERV_READY)
 
 client: $(CLIENT_OBJS)
-	@$(GCC) $(FLAGS) $(CLIENT_OBJS) -o $(CLIENT_NAME)
+	@$(GCC) $(FLAGS) $(CLIENT_OBJS) $(LIB) -o $(CLIENT_NAME)
 	@$(CLI_READY)
 
 clean:
 	@rm -rf $(OBJS)
+	@cd libft && make clean
 	@$(CLEANED)
 
 fclean: clean
 	@rm -rf $(SERVER_NAME) $(CLIENT_NAME)
+	@cd libft && make fclean
 	@$(FCLEANED)
 
 re:	fclean all

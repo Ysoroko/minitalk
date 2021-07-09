@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/17 09:39:58 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/01/22 14:47:33 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+int	ft_memcmp(const void *str1, const void *str2, size_t n)
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	size_t			i;
+	unsigned char	*my_str1;
+	unsigned char	*my_str2;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	i = 0;
+	my_str1 = (unsigned char *)(str1);
+	my_str2 = (unsigned char *)(str2);
+	while (my_str1[i] == my_str2[i] && i < n - 1)
+	{
+		i++;
+	}
+	if (i >= n)
+	{
+		return (0);
+	}
+	else
+	{
+		return (my_str1[i] - my_str2[i]);
+	}
 }

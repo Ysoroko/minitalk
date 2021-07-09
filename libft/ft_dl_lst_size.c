@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_dl_lst_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/04/08 16:30:31 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/08 16:34:01 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** FT_DL_LST_SIZE
+** This function will count the number of elements in a t_dl_lst (double linked
+** list) structure and return the number of elements it contains
 */
 
-int	main(void)
+int	ft_dl_lst_size(t_dl_lst *first)
 {
-	int	id;
+	int			ret;
+	t_dl_lst	*temp;
 
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	ret = 0;
+	temp = first;
+	while (temp)
+	{
+		temp = temp->next;
+		ret++;
+	}
+	return (ret);
 }

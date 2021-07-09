@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_is_a_valid_double_quote.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/05/05 09:12:54 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/05/05 09:16:34 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** ft_is_a_valid_double_quote
+** This function returns 1 str[i] is a valid double quote
+** (not preceeded by a \) or 0 if it is not
 */
 
-int	main(void)
+int	ft_is_a_valid_double_quote(char *str, int i)
 {
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (str[i] == '\"' && i && str[i - 1] != '\\')
+		return (1);
+	else if (str[i] == '\"' && !i)
+		return (1);
+	else
+		return (0);
 }

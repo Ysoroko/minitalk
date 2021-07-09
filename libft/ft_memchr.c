@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/17 09:38:25 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/01/22 14:52:04 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+void	*ft_memchr(const void *str, int c, size_t n)
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	size_t			i;
+	unsigned char	*my_str;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	i = 0;
+	my_str = (unsigned char *)(str);
+	while (i < n)
+	{
+		if (my_str[i] == (unsigned char)(c))
+		{
+			return (&my_str[i]);
+		}
+		i++;
+	}
+	return (0);
 }

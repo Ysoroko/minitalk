@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_dl_lstiter.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/04/08 17:39:41 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/10 15:03:13 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
-
-void	ft_test(int sig)
-{
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+#include "../include/libft.h"
 
 /*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
+** FT_DL_LSTITER
+** It will apply function f to all of the elements
+** before and after the *lst element
 */
 
-int	main(void)
+void	ft_dl_lstiter(t_dl_lst *lst, void (*f)(void *))
 {
-	int	id;
+	t_dl_lst	*temp;
 
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (!lst || !f)
+		return ;
+	temp = ft_dl_lst_first(lst);
+	while (temp)
+	{
+		f(temp->content);
+		temp = temp->next;
+	}
 }

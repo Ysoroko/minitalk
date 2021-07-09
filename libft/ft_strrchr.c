@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/17 09:40:35 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/01/22 14:52:21 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+char	*ft_strrchr(const char *s, int c)
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	size_t		str_len;
+	char		*my_s;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	str_len = ft_strlen(s);
+	my_s = (char *)(s);
+	if ((char)(c) == '\0')
+	{
+		return (&my_s[str_len]);
+	}
+	while (str_len > 0)
+	{
+		if (my_s[str_len] == (char)(c))
+		{
+			return (&my_s[str_len]);
+		}
+		str_len--;
+	}
+	if (my_s[str_len] == (char)(c))
+	{
+		return (my_s);
+	}
+	return (0);
 }

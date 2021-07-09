@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 12:42:26 by ysoroko          ###   ########.fr       */
+/*   Created: 2020/11/22 15:43:21 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/04/04 17:04:27 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minitalk.h"
+#include "../include/libft.h"
 
-void	ft_test(int sig)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	sig = 0;
-	ft_putendl_fd("Got it!", 1);
-}
+	t_list	*temp;
+	t_list	*last_address_of_temp;
 
-/*
-** SIGUSR1 = 30
-** SIGUSR2 = 31
-*/
-
-int	main(void)
-{
-	int	id;
-
-	id = (int)(getpid());
-	ft_putnbr_fd(id, 1);
-	signal(SIGUSR1, ft_test);
-	while (1)
-		usleep(1000);
+	if (lst == 0 || del == 0 || *lst == 0)
+		return ;
+	temp = *lst;
+	last_address_of_temp = temp;
+	while (temp != 0)
+	{
+		del(temp->content);
+		temp = temp->next;
+		free(last_address_of_temp);
+		last_address_of_temp = temp;
+	}
 }
