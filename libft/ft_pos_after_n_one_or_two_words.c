@@ -6,11 +6,11 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 11:56:11 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/05/05 14:41:47 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/09 14:41:19 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "./include/libft.h"
 
 /*
 ** ft_pos_after_n_one_or_two_words

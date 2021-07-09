@@ -6,11 +6,11 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 13:21:56 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/04/12 14:53:52 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/09 14:41:19 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "./include/libft.h"
 
 /*
 ** FT_EXTRACT_SECOND_WORD

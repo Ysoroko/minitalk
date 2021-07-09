@@ -6,11 +6,11 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 13:44:58 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/05/03 13:48:30 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/09 14:41:19 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "./include/libft.h"
 
 /*
 ** ft_return_strdup_and_free_src
