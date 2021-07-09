@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:33:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 16:55:02 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/09 17:10:55 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ int	main(int argc, char **argv)
 	pid = ft_atoi(argv[1]);
 	str_to_send = argv[2];
 	i = -1;
-	ft_putendl_fd(str_to_send, 1);
 	while (str_to_send[++i])
 		ft_send_next_char_bit_by_bit(str_to_send[i], pid);
 }
