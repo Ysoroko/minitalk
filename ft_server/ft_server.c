@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 15:11:36 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/09 16:59:22 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 void	ft_test(int sig)
 {
-	sig = 0;
-	ft_putnbr_fd(sig, 1);
+	if (sig == SIGUSR1)
+		ft_putnbr_fd(0, 1);
+	else
+		ft_putnbr_fd(1, 1);
 }
 
 /*
@@ -29,8 +31,11 @@ int	main(void)
 
 	id = (int)(getpid());
 	ft_putnbr_fd(id, 1);
+	ft_putchar_fd('\n', 1);
 	signal(SIGUSR1, ft_test);
 	signal(SIGUSR2, ft_test);
 	while (1)
+	{
 		usleep(1000);
+	}
 }
