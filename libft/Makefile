@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 16:06:56 by ysoroko           #+#    #+#              #
-#    Updated: 2021/07/09 12:52:30 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/07/09 14:36:42 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -152,15 +152,6 @@ BOLD_GREEN			=	\033[1;32m
 
 NO_COLOR			=	\033[0m
 
-COPMILING_LIBFT:
-					@echo "\n📚 $(BOLD_GREEN)Compiling Libft... \n";
-
-LIBFT_COMPILED:
-					@echo "✅ Libft compiled! \n$(NO_COLOR)";
-					
-.c.o:	
-	@${CC} ${CFLAGS} -I include -c $< -o ${<:.c=.o} \
-
 MAIN_PART		=	$(filter-out $(BONUS), $(SRC))
 
 OBJS			=	$(SRC:.c=.o)
@@ -173,10 +164,11 @@ LINK			=	ar rc
 
 all: 		$(NAME)
 
-$(NAME):	COPMILING_LIBFT $(MAIN_PART_OBJS) LIBFT_COMPILED
+$(NAME):	$(MAIN_PART_OBJS)
 			@$(LINK) $(NAME) $(MAIN_PART_OBJS)
+			@$(LIBFT_COMPILED)
 
-bonus:		COPMILING_LIBFT $(OBJS) LIBFT_COMPILED
+bonus:		$(OBJS)
 			@$(LINK) $(NAME) $(OBJS)
 
 clean:
@@ -186,5 +178,12 @@ fclean:		clean
 			@rm -f $(NAME)
 
 re:			fclean all
+
+COMPILING_LIBFT	=	echo "\n📚 $(BOLD_GREEN)Compiling Libft... \n";
+
+LIBFT_COMPILED	=	echo "📚 Libft compiled! \n$(NO_COLOR)";
+					
+.c.o:	
+	@${CC} ${CFLAGS} -I include -c $< -o ${<:.c=.o} \
 
 .PHONY:		all clean fclean re bonus

@@ -6,7 +6,7 @@
 #    By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/09 11:40:59 by ysoroko           #+#    #+#              #
-#    Updated: 2021/07/09 13:50:29 by ysoroko          ###   ########.fr        #
+#    Updated: 2021/07/09 14:37:04 by ysoroko          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,16 +17,16 @@ SERVER		=	ft_server/ft_server.c
 
 CLIENT		=	ft_client/ft_client.c
 
-LIBFT		=	cd libft && make bonus
+LIBFT		=	cd libft && make
 
 LIB			=	libft/libft.a
 
 # Sources and objects
-SERVER_SRC	=	$(SERVER) \
+SERVER_SRC	=	$(SERVER)
 
 SERVER_OBJS	=	$(SERVER_SRC:.c=.o)
 
-CLIENT_SRC	=	$(CLIENT) \
+CLIENT_SRC	=	$(CLIENT)
 
 CLIENT_OBJS	=	$(CLIENT_SRC:.c=.o)
 
@@ -45,7 +45,7 @@ SERVER_NAME	=	server
 
 CLIENT_NAME	=	client
 
-NAME		=	minitalk
+NAME		=	server
 
 # ------------------------------ Colors ------------------------------
 
@@ -59,7 +59,7 @@ NO_COLOR	=	\033[0m
 
 # ------------------------------ Messages ------------------------------
 
-COMP_START	=	echo "\n🚧 $(BOLD_YELLOW)Make: $(NO_COLOR)Compiling...\n"
+COMP_START	=	echo "\n🚧 $(BOLD_YELLOW)Make: $(NO_COLOR)Starting the compilation...\n"
 
 SERV_READY	=	echo "\n📥 Server ready!\n"
 
@@ -69,25 +69,21 @@ CLEANED		=	echo "\n💧 $(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" f
 
 FCLEANED	=	echo "\n🧼 $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
 
-
 # ------------------------------ Rules ------------------------------
-
-.c.o:
-	@${GCC} ${FLAGS} $(INCLUDE) -c $< -o ${<:.c=.o}
 
 all: $(NAME)
 
-$(NAME): comp_start server client
+$(NAME): comp_start ft_server ft_client
 
 comp_start:
 	@$(COMP_START)
 	@$(LIBFT)
 
-server: $(SERVER_OBJS)
+ft_server: $(SERVER_OBJS)
 	@$(GCC) $(FLAGS) $(SERVER_OBJS) $(LIB) -o $(SERVER_NAME)
 	@$(SERV_READY)
 
-client: $(CLIENT_OBJS)
+ft_client: $(CLIENT_OBJS)
 	@$(GCC) $(FLAGS) $(CLIENT_OBJS) $(LIB) -o $(CLIENT_NAME)
 	@$(CLI_READY)
 
@@ -101,6 +97,9 @@ fclean: clean
 	@cd libft && make fclean
 	@$(FCLEANED)
 
+.c.o:
+	@${GCC} ${FLAGS} $(INCLUDE) -c $< -o ${<:.c=.o}
+
 re:	fclean all
 
-.PHONY: all minitalk server client clean fclean re
+.PHONY: all minitalk server client clean fclean re libft
