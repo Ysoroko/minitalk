@@ -6,18 +6,45 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 10:39:35 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 16:59:22 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/12 12:18:18 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minitalk.h"
 
-void	ft_test(int sig)
+static void	ft_update_the_result(int signal)
 {
-	if (sig == SIGUSR1)
-		ft_putnbr_fd(0, 1);
+	static int	char_value = 0;
+	static int	current_bit = 0;
+
+	//printf("Signal received: [%d]\n", signal);
+	//printf("Current bit: [%d]\n", current_bit);
+	if (current_bit == 7)
+	{
+		//printf("char value: [%d]\n", char_value);
+		if (char_value == 0)
+			ft_putchar_fd('\n', 1);
+		ft_putchar_fd(char_value, 1);
+		current_bit = 0;
+		char_value = 0;
+	}
 	else
-		ft_putnbr_fd(1, 1);
+	{
+		if (signal == SIGUSR2)
+			char_value += ft_recursive_power(2, current_bit);
+		current_bit++;
+	}
+}
+
+static void	ft_test(int sig)
+{
+	//if (sig == SIGUSR1)
+	//{
+	//	ft_putnbr_fd(0, 1);
+	//}
+	//else
+	//	ft_putnbr_fd(1, 1);
+	ft_update_the_result(sig);
 }
 
 /*

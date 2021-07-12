@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 15:32:25 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/05/06 11:53:41 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/12 11:36:45 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,7 @@ void		ft_display_first_n_chars_with_i(char *str,
 				int n, int fd, int j);
 int			ft_is_a_valid_double_quote(char *str, int i);
 int			ft_isspace(int c);
+int			ft_recursive_power(int nb, int power);
+char		*ft_strjoin_char_free_prev_exit(char **str, char c);
 
 #endif

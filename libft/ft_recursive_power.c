@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_recursive_power.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/08 09:25:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/12 11:42:48 by ysoroko          ###   ########.fr       */
+/*   Created: 2021/07/12 11:08:48 by ysoroko           #+#    #+#             */
+/*   Updated: 2021/07/12 11:12:03 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
-
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-# include "../libft/include/libft.h"
+#include "./include/libft.h"
 
 /*
-** UTILS
+** int	ft_recursive_power(int nb, int power)
+** This function returns the result of nb ^ power
+** Example: ft_recursive_power(2, 3) = 2 ^ 3 = 8
 */
 
-int		ft_atoi(const char *str);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putendl_fd(char *s, int fd);
-void	ft_putnbr_fd(int n, int fd);
-
-
-#endif
+int	ft_recursive_power(int nb, int power)
+{
+	if (power < 0)
+		return (0);
+	else if (power == 0 && power == 0)
+		return (1);
+	else
+		return (nb * ft_recursive_power(nb, power - 1));
+}
