@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:33:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/12 15:24:44 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/12 15:31:43 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	ft_send_next_char_bit_by_bit(unsigned char c, int pid)
 		else
 			kill(pid, SIGUSR1);
 		c = c >> 1;
-		usleep(1000);
+		usleep(WAIT_TIME);
 	}
 }
 
@@ -76,7 +76,7 @@ static void	ft_send_strlen_bit_by_bit(int len, int pid)
 		else
 			kill(pid, SIGUSR1);
 		len = len >> 1;
-		usleep(1000);
+		usleep(WAIT_TIME);
 	}
 }
 
