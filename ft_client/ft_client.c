@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:33:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/09 17:10:55 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/12 15:24:44 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,30 @@ static void	ft_send_next_char_bit_by_bit(unsigned char c, int pid)
 	while (++i < 8)
 	{
 		if (c & 0x01)
-			kill(pid, SIGUSR2); //31 = 1
+			kill(pid, SIGUSR2);
 		else
-			kill(pid, SIGUSR1); //30 = 0
+			kill(pid, SIGUSR1);
 		c = c >> 1;
+		usleep(1000);
+	}
+}
+
+/*
+** Function used to send the length of the string bit by bit
+*/
+
+static void	ft_send_strlen_bit_by_bit(int len, int pid)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 32)
+	{
+		if (len & 0x01)
+			kill(pid, SIGUSR2);
+		else
+			kill(pid, SIGUSR1);
+		len = len >> 1;
 		usleep(1000);
 	}
 }
@@ -64,13 +84,17 @@ int	main(int argc, char **argv)
 {
 	int		pid;
 	char	*str_to_send;
+	int		len;
 	int		i;
 
 	if (ft_found_errors_in_main(argc, argv))
 		return (-1);
 	pid = ft_atoi(argv[1]);
 	str_to_send = argv[2];
+	len = ft_strlen(str_to_send);
 	i = -1;
+	ft_send_strlen_bit_by_bit(len, pid);
 	while (str_to_send[++i])
 		ft_send_next_char_bit_by_bit(str_to_send[i], pid);
+	ft_send_next_char_bit_by_bit(str_to_send[i], pid);
 }
