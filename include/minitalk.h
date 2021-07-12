@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 09:25:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/12 15:31:24 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/12 15:34:19 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 
-# define WAIT_TIME 100
+/*
+** Macros
+*/
 
+# define WAIT_TIME 100
 
 #endif
