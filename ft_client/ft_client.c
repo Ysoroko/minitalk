@@ -6,7 +6,7 @@
 /*   By: ysoroko <ysoroko@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/08 11:33:40 by ysoroko           #+#    #+#             */
-/*   Updated: 2021/07/12 15:31:43 by ysoroko          ###   ########.fr       */
+/*   Updated: 2021/07/19 12:11:44 by ysoroko          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	main(int argc, char **argv)
 	if (ft_found_errors_in_main(argc, argv))
 		return (-1);
 	pid = ft_atoi(argv[1]);
+	if (pid <= 0)
+		return (-1);
 	str_to_send = argv[2];
 	len = ft_strlen(str_to_send);
 	i = -1;
