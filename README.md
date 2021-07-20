@@ -20,7 +20,7 @@
 ![](images/server_base.png)
 
 #### Additional behaviour:
-1) The client can also send utf-8 format characters
+1) The client can also send Unicode format characters
 ![](images/client_bonus.png)
 
 2) The server interprets and displays them correctly <br />
